@@ -36,7 +36,7 @@ Works fully offline on CPU; CUDA is used automatically when available.
 1. **Clone the repository and create a virtual environment**
 
    ```bash
-   git clone https://github.com/<your‑nick>/SmartRoadSigns.git
+   git clone https://github.com/Sasha5832/ProjektZespolowy.git
    cd SmartRoadSigns
    python -m venv .venv
    .\.venv\Scripts\activate        # Windows
