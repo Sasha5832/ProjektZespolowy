@@ -1,0 +1,6 @@
+ultralytics==8.3.0      # YOLO v11-m and training utilities
+torch>=2.2.0            # pulled automatically by Ultralytics, pinned here for clarity
+fastapi==0.111.0        # lightweight REST framework
+uvicorn[standard]==0.29.0  # ASGI server with hot-reload option
+pillow>=10.0.0          # image loading/processing in FastAPI
+python-multipart>=0.0.9 # handles multipart/form-data uploads
