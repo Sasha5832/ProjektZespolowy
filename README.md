@@ -82,14 +82,3 @@ Works fully offline on CPU; CUDA is used automatically when available.
 ```
 
 ---
-
-## Technical notes
-
-* `ResizeObserver` in `script.js` redraws boxes whenever a thumbnail changes size, so labels remain aligned even when the CSS grid re‑flows.
-* Two‑column gallery is defined in `style.css` with `grid-template-columns: repeat(2, 1fr)`.
-
----
-
-## License
-
-MIT License – see the `LICENSE` file.
