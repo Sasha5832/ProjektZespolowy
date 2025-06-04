@@ -1,41 +1,33 @@
 # SmartRoadSigns
 
-Web application that recognises Polish road signs on photos using a custom YOLO v11-m model.  
-The user can upload up to ten images at once; the page shows bounding boxes around detected signs and lists their names with short descriptions.
+A web application that recognises Polish road signs on photographs with a custom **YOLO v11‑m** model. Users can upload up to ten images at once; the page draws bounding boxes around every detected sign and lists each sign name together with a short description.
 
 ---
 
-## Key points
+## Main components
 
-* Front-end: HTML 5, CSS 3, vanilla JavaScript  
-* Back-end: FastAPI, Ultralytics 8.3, custom weight file `traffic_best.pt`  
-* Works fully offline on CPU; optional CUDA if available  
-* Responsive 2-column gallery, dark theme, live drawing of boxes on a `<canvas>`  
-* ResizeObserver keeps boxes aligned even when the grid re-flows
+| Layer         | Technology                                                  |
+| ------------- | ----------------------------------------------------------- |
+| Front‑end     | HTML 5 · CSS 3 · vanilla JavaScript                         |
+| Back‑end      | FastAPI · Ultralytics 8.3 · custom weight file `yolo11m.pt` |
+| Static server | XAMPP (Apache) on Windows – any local HTTP server works     |
+
+Works fully offline on CPU; CUDA is used automatically when available.
 
 ---
 
-## Folder layout
+## Directory structure
 
+```
 .
-├─ backend/
-│ ├─ api.py # FastAPI application
-│ └─ models/traffic_best.pt # custom YOLO v11-m weights
-├─ frontend/
-│ ├─ index.html
-│ ├─ style.css
-│ └─ script.js
-└─ requirements.txt
-
-
----
-
-## Requirements
-
-* Python 3.10 or newer  
-* XAMPP (or any local Apache) for serving static files  
-* The Ultralytics package (installed via `pip`)  
-* A trained weight file `traffic_best.pt` based on YOLO v11-m
+├─ pythonb
+│  ├─ api.py          # FastAPI application
+│  └─ yolo11m.pt      # trained YOLO v11‑m weights
+├─ index.html         # front‑end entry
+├─ style.css          # dark theme + gallery layout
+├─ script.js          # upload, fetch, drawing logic
+└─ requirements.txt   # ultralytics, fastapi, uvicorn, pillow
+```
 
 ---
 
@@ -44,52 +36,40 @@ The user can upload up to ten images at once; the page shows bounding boxes arou
 1. **Clone the repository and create a virtual environment**
 
    ```bash
-   git clone https://github.com/<your-nick>/SmartRoadSigns.git
+   git clone https://github.com/<your‑nick>/SmartRoadSigns.git
    cd SmartRoadSigns
    python -m venv .venv
-   .\.venv\Scripts\activate          # on Windows
+   .\.venv\Scripts\activate        # Windows
    pip install -r requirements.txt   # installs ultralytics, fastapi, uvicorn, pillow
-Place your model
+   ```
+2. **Start Apache (XAMPP)**
+   Open *XAMPP Control Panel* and press **Start** next to **Apache**.
+   Static files (`index.html`, `style.css`, `script.js`) are now served at `http://localhost/`.
+3. **Start the FastAPI server**
 
-Copy the file traffic_best.pt to backend/models/traffic_best.pt.
+   ```bash
+   cd pythonb
+   uvicorn api:app --port 8000 --reload
+   ```
+4. **Open the application**
+   `http://localhost/index.html`
 
-Start Apache
+   Swagger for manual testing: `http://localhost:8000/docs`
 
-Open XAMPP Control Panel and press Start next to Apache.
-The static front-end will be available under http://localhost/.
+---
 
-Start the FastAPI server
+## Usage
 
-From the repository root (while the virtual environment is active):
+1. Click **Wybierz obrazy** and choose up to ten photographs.
+2. Press **Rozpoznaj znaki na wszystkich**.
+3. Bounding boxes and labels appear on each thumbnail.
+4. The button bar shows *Obraz n (liczba znaków)*. Clicking a button displays detected sign names and Polish descriptions.
 
-bash
-Копировать
-Редактировать
-uvicorn backend.api:app --port 8000 --reload
-Open the application
+---
 
-arduino
-Копировать
-Редактировать
-http://localhost/frontend/index.html
-Swagger UI for manual tests:
-http://localhost:8000/docs
+## API response format
 
-Usage
-Press Wybierz obrazy and select up to ten photographs.
-
-Press Rozpoznaj znaki na wszystkich.
-
-Bounding boxes and labels appear on each thumbnail.
-
-A button bar shows Obraz n (liczba znaków) – clicking reveals the list of detected signs with Polish descriptions.
-
-Short technical notes
-The back-end endpoint /predict accepts multipart/form-data with one image file and returns JSON:
-
-json
-Копировать
-Редактировать
+```json
 {
   "detections": [
     {
@@ -99,4 +79,17 @@ json
     }
   ]
 }
-Front-end scales every image to fit a two-column CSS Grid; ResizeObserver triggers re-drawing of boxes whenever an image changes size.
+```
+
+---
+
+## Technical notes
+
+* `ResizeObserver` in `script.js` redraws boxes whenever a thumbnail changes size, so labels remain aligned even when the CSS grid re‑flows.
+* Two‑column gallery is defined in `style.css` with `grid-template-columns: repeat(2, 1fr)`.
+
+---
+
+## License
+
+MIT License – see the `LICENSE` file.
