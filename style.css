@@ -1,0 +1,95 @@
+/* -------- RESET -------- */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* -------- GLOBAL -------- */
+body{
+  font-family:'Poppins',sans-serif;color:#fff;min-height:100vh;
+  background:linear-gradient(-45deg,#141414,#2c2c2c,#141414,#2c2c2c);
+  background-size:400% 400%;animation:gradient 20s ease infinite;
+}
+@keyframes gradient{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+h1,h2{font-weight:600}
+
+/* -------- NAVBAR -------- */
+.navbar{
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(0,0,0,.4);padding:15px 30px;position:fixed;width:100%;top:0;left:0;z-index:999;
+}
+.nav-logo a{color:#fff;text-decoration:none;font-size:1.4rem;font-weight:600}
+.nav-links{list-style:none;display:flex;gap:20px}
+.nav-links a{color:#fff;text-decoration:none;font-weight:300;transition:.2s}
+.nav-links a:hover{color:#ffbd39}
+
+/* -------- HERO -------- */
+.hero{
+  display:flex;justify-content:center;align-items:center;text-align:center;
+  height:100vh;padding-top:80px}
+.hero h1{
+  font-size:3rem;margin-bottom:20px;
+  background:linear-gradient(90deg,#ffbd39,#e61c5d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.2rem;margin-bottom:30px}
+.btn-hero{
+  display:inline-block;background:#ffbd39;color:#000;font-weight:600;
+  padding:12px 24px;border-radius:4px;text-decoration:none;transition:.3s}
+.btn-hero:hover{background:#e6a634}
+
+/* -------- SEKCJE OGÓLNE -------- */
+.section{padding:80px 20px;width:100%}
+.section-inner{
+  max-width:1100px;margin:0 auto;background:rgba(0,0,0,.45);
+  border-radius:8px;padding:40px;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.about-section p,.contact-section p{margin-top:20px;line-height:1.6}
+
+/* -------- BUTTONY -------- */
+.file-btn,.run-btn,.thumb-btn{
+  background:#ffbd39;color:#000;font-weight:600;border:none;border-radius:4px;
+  padding:3px 3px;cursor:pointer}
+.run-btn{background:#e61c5d;color:#fff;display:block;margin:20px 0 0 auto}
+.run-btn:hover{background:#c4164e}
+.thumb-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.thumb-btn.active{background:#e61c5d;color:#fff}
+#image-upload{
+  display:none;
+}
+
+/* -------- GRID MINIATUR -------- */
+.grid{
+  display:grid;gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  margin-top:20px}
+.img-wrap{
+  position:relative;
+  border:2px solid #ffbd39;
+  border-radius:6px;
+}
+
+.img-wrap img{
+  width:100%;
+  height:auto;
+  display:block;         /* bez szczelin */
+}
+
+.img-wrap canvas{
+  position:absolute;
+  inset:0;               /* top:0; right:0; bottom:0; left:0 */
+  pointer-events:none;
+}
+
+
+.img-wrap img{border:2px solid #ffbd39}
+
+/* -------- DETAIL BOX -------- */
+.detail-box{
+  min-height:100px;border:2px dashed #ffbd39;border-radius:6px;
+  padding:20px;background:#2a2a2a;text-align:left}
+.detail-box ul{margin-top:8px;list-style:disc inside}
+
+/* -------- RESPONSYWNOŚĆ -------- */
+.grid{
+  display:grid;
+  gap:26px;                                /* trochę większy odstęp */
+  grid-template-columns:repeat(2, 1fr);    /* ← tylko DWA równe słupki */
+  margin-top:20px;
+}
+
